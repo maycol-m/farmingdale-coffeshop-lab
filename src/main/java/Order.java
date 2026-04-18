@@ -2,13 +2,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
+
+    public enum ServiceType {
+        DINE_IN,
+        TAKEOUT,
+        MOBILE_PICKUP
+    }
+
+    private String customerName;
+    private ServiceType serviceType;
     private List<Beverage> beverages;
 
-    public Order() {
+    public Order(String customerName, ServiceType serviceType) {
+        this.customerName = customerName;
+        this.serviceType = serviceType;
         this.beverages = new ArrayList<>();
     }
 
-    public void addBeverage(Beverage beverage) {
+    public void addItem(Beverage beverage) {
         beverages.add(beverage);
     }
 
@@ -16,8 +27,10 @@ public class Order {
         return beverages;
     }
 
-    public void printOrder() {
-        System.out.println("=== Order Summary ===");
+    public void printReceipt() {
+        System.out.println("=== Receipt ===");
+        System.out.println("Customer: " + customerName);
+        System.out.println("Service Type: " + serviceType);
         for (int i = 0; i < beverages.size(); i++) {
             System.out.println((i + 1) + ". " + beverages.get(i).getDescription());
         }
